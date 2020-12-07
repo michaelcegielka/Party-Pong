@@ -125,7 +125,7 @@ function draw(){
     }
     //Spieler bewegen sich durch drücken von "A" und "D" bzw. "<-" und "->"
     function keyPressed(){
-
+      //Die Zahlen sind die jeweiligen Tasten
     if(keyCode === 65)
           xPosOne += 5;
           else if(keyCode === 68)
