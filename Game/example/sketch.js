@@ -6,14 +6,22 @@ var yPosOne = 0;
 var xPosTwo = 0;
 var yPosTwo = 0;
 
+
 // var distance;
 // const max = 50;
 
+var panda;
+
+function preload() {
+  
+  panda = loadImage('panda.jpg');
+}
 
 
 function setup(){
     //Unser Fenster
     createCanvas(windowWidth, windowHeight);
+    background(63, 120, 22);
     //Die Objekte sind nicht ausgemalt
     noFill(0)
             //   intervalCurrentPosition(positionPing, 5000);
@@ -24,18 +32,22 @@ function setup(){
     //Aktualisierungsrate
     // @param = FPS --> wenn leer wir die FPS des Gerätes genommen.
     frameRate(5)
+    
+
 }
 
 function draw(){
+ 
     //Arbeitsbereich skalieren und platzieren
     translate(width / 2, height / 2);
-    scale(4, -4)
-    // Hintergrundfarbe
-    background(63, 120, 22);
 
+    scale(4, -4);
+    // Hintergrundfarbe
+    pandaBg();
+    
     // Disko Background ;=)
     // backgroundC();
-
+    
     //Linienstärke
     strokeWeight(1 / scale)
 
@@ -49,6 +61,7 @@ function draw(){
     spielerEins();
     spielerZwei();
     ball();
+
 }
      // function setMobilePos(){
      // var mobileX = mobileDatenX;
@@ -91,7 +104,10 @@ function draw(){
     }
     //Erzeugt den Ball
     function ball(){
-    fill(random(0, 255));
+        r = random(0, 255);
+        g = random(0, 255);
+        b = random(0, 255);
+    fill(r, g, b);
     ellipse(0, 0, 10, 10);
     noFill();
     } 
@@ -137,5 +153,10 @@ function draw(){
         else if(xPosTwo >= 35)
         xPosTwo = 35; 
 
+  }
+  function pandaBg(){
+
+    rotate(PI, 3.0)
+    image(panda, -75, -75, 150, 150 );
   }
 
