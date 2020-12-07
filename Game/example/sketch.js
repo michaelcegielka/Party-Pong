@@ -127,15 +127,15 @@ function draw(){
     function keyPressed(){
 
     if(keyCode === 65)
-          xPosOne += -5;
+          xPosOne += 5;
           else if(keyCode === 68)
-           xPosOne += 5;
+           xPosOne += -5;
             else    
                   xPosOne = xPosOne;
                   if(keyCode === 37)
-                  xPosTwo += -5;
+                  xPosTwo += 5;
                   else if(keyCode === 39)
-                   xPosTwo += 5;
+                   xPosTwo += -5;
                     else    
                           xPosTwo = xPosTwo;
       
