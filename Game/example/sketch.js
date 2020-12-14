@@ -6,10 +6,10 @@ var yPosOne = 0;
 var xPosTwo = 0;
 var yPosTwo = 0;
 let button;
-
+let slider;
 // var distance;
 // const max = 50;
-
+var backgroundColor;
 var panda;
 
 function preload() {
@@ -21,31 +21,50 @@ function preload() {
 function setup(){
     //Unser Fenster
     createCanvas(windowWidth, windowHeight);
-    background(63, 120, 22);
+
     //Die Objekte sind nicht ausgemalt
     noFill(0)
             //   intervalCurrentPosition(positionPing, 5000);
             //   distance = calcGeoDistance(46.785844, -92.015965, 44.940834, -93.311287, 'mi')
             //	 print(distance);
     //setzt die Spieler an die Startposition
-    if (!navigator.geolocation) {
-          alert("navigator.geolocation is not available");
-        }
-        navigator.geolocation.getCurrentPosition(setPos);
+    sliderShow();
+
 
     button = createButton('click me');
     button.position(19, 19);
+
     
     setPosition();
+
+
     //Aktualisierungsrate
     // @param = FPS --> wenn leer wir die FPS des Gerätes genommen.
     frameRate(5)
+
     
 
 }
+function sliderShow(){
+  slider = createSlider(0, 255, 100);
+  slider.position(windowWidth/2 + 400, windowHeight/2);
+  slider.style('width', '300px');
+}
+  function playerPos(){
+    scale(-1/2, 1/2);
+    if (!navigator.geolocation) {
+      alert("navigator.geolocation is not available");
+    }
+    navigator.geolocation.getCurrentPosition(setPos);
+  }
+  
+
 
 function draw(){
- 
+
+
+  let rotationTest = slider.value();
+  background(rotationTest);
     //Arbeitsbereich skalieren und platzieren
     translate(width / 2, height / 2);
 
@@ -70,6 +89,12 @@ function draw(){
     spielerZwei();
     ball();
     button.mousePressed(changeBG);
+    playerPos();
+
+
+
+
+
 }
      // function setMobilePos(){
      // var mobileX = mobileDatenX;
@@ -190,8 +215,9 @@ fill(0, 102, 153);
 function setPos(position) {
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
-  background(0);
-  fill(255);
+  
+  fill(255, 100, 100);
   textSize(32);
-  text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), 10, height/8);
+  text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), -200, 200);
+  noFill();
 }
