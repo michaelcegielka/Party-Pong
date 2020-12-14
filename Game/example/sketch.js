@@ -45,19 +45,7 @@ function setup(){
     
 
 }
-function sliderShow(){
-  slider = createSlider(0, 255, 100);
-  slider.position(windowWidth/2 + 400, windowHeight/2);
-  slider.style('width', '300px');
-}
-  function playerPos(){
-    scale(-1/2, 1/2);
-    if (!navigator.geolocation) {
-      alert("navigator.geolocation is not available");
-    }
-    navigator.geolocation.getCurrentPosition(setPos);
-  }
-  
+
 
 
 function draw(){
@@ -221,3 +209,16 @@ function setPos(position) {
   text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), -200, 200);
   noFill();
 }
+function sliderShow(){
+  slider = createSlider(0, 255, 100);
+  slider.position(windowWidth/2 + 400, windowHeight/2);
+  slider.style('width', '300px');
+}
+  function playerPos(){
+    scale(-1/2, 1/2);
+    if (!navigator.geolocation) {
+      alert("navigator.geolocation is not available");
+    }
+    navigator.geolocation.getCurrentPosition(setPos);
+  }
+  
