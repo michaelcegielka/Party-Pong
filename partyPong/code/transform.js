@@ -82,12 +82,14 @@ Koordinatensystem zurückzukehren, muss der "transformMode" mit transformModeOff
 beendet werden.
 */
 function transformModeOn() {
+  
   let moveByRot = calculateRotatedVector(startingPoint, yMinPoint);
   angleMode(DEGREES);
   push();
   translate(startingPoint.x, startingPoint.y);
   rotate(rotAngle);
   translate(0, moveByRot.y);
+  scale(1/2, 1/2);
 }
 
 //Deaktiviert den "transformMode".

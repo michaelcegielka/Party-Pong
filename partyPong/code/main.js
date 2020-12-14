@@ -70,7 +70,7 @@ function executeOnMapChange() {
 function setSlider(){
 
   slider = createSlider(0, 180, 90, 10);
-  slider.position(windowWidth/2.8, windowHeight/3);
-  slider.style('width', '500px');
+  slider.position(windowWidth/2, windowHeight/3);
+  slider.style('width', '250px');
 
 }
