@@ -5,7 +5,7 @@ var yPosOne = 0;
 //Koordinaten von Spieler 2.
 var xPosTwo = 0;
 var yPosTwo = 0;
-
+let button;
 
 // var distance;
 // const max = 50;
@@ -28,6 +28,11 @@ function setup(){
             //   distance = calcGeoDistance(46.785844, -92.015965, 44.940834, -93.311287, 'mi')
             //	 print(distance);
     //setzt die Spieler an die Startposition
+
+
+    button = createButton('click me');
+    button.position(19, 19);
+    
     setPosition();
     //Aktualisierungsrate
     // @param = FPS --> wenn leer wir die FPS des Gerätes genommen.
@@ -61,7 +66,7 @@ function draw(){
     spielerEins();
     spielerZwei();
     ball();
-
+    button.mousePressed(changeBG);
 }
      // function setMobilePos(){
      // var mobileX = mobileDatenX;
@@ -160,3 +165,14 @@ function draw(){
     image(panda, -75, -75, 150, 150 );
   }
 
+
+
+
+function changeBG() {
+  textSize(32);
+text('word', 10, 30);
+fill(0, 102, 153);
+text('word', 10, 60);
+fill(0, 102, 153, 51);
+text('word', 10, 90);
+}
