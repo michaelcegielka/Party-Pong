@@ -28,7 +28,10 @@ function setup(){
             //   distance = calcGeoDistance(46.785844, -92.015965, 44.940834, -93.311287, 'mi')
             //	 print(distance);
     //setzt die Spieler an die Startposition
-
+    if (!navigator.geolocation) {
+          alert("navigator.geolocation is not available");
+        }
+        navigator.geolocation.getCurrentPosition(setPos);
 
     button = createButton('click me');
     button.position(19, 19);
@@ -170,9 +173,25 @@ function draw(){
 
 function changeBG() {
   textSize(32);
-text('word', 10, 30);
+text('TEST', 0, 10);
 fill(0, 102, 153);
-text('word', 10, 60);
-fill(0, 102, 153, 51);
-text('word', 10, 90);
+}
+//function setup() {
+//  createCanvas(windowWidth, windowHeight);
+ // console.log('starting');
+//	noStroke();
+  // get position once
+//  if (!navigator.geolocation) {
+//    alert("navigator.geolocation is not available");
+//  }
+//  navigator.geolocation.getCurrentPosition(setPos);
+//}
+
+function setPos(position) {
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
+  background(0);
+  fill(255);
+  textSize(32);
+  text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), 10, height/2);
 }
