@@ -183,19 +183,3 @@ function destVincenty(lat1, lon1, brng, dist) {
 
 
 
-function playersCurrentPosition(){
-
-  if (!navigator.geolocation) {
-    alert("navigator.geolocation is not available");
-  }
-  navigator.geolocation.getCurrentPosition(setPlayerPos);
-}
-  function setPlayerPos(position) {
-    var playerCoordX = position.coords.latitude;
-    var playerCoordY = position.coords.longtitude;
-    fill(255, 100, 100);
-    textSize(32);
-    text("Current position: " + nf(playerCoordX,2,2) + " " + nf(playerCoordY,2,2), -200, 200);
-    noFill();
-  }
-
