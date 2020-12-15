@@ -1,7 +1,8 @@
 
 //Das Canvas-Objekt für p5.js
 let canvas;
-let timeBetween = 0;
+let timeBetweenGPS = 0;
+let timeBetweenDraw = 0;
 
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 //Wird ein mal zu Beginn von p5.js aufgerufen.
@@ -23,16 +24,18 @@ function setup() {
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
 
-  if(timeBetween >= 1000) {
+ if(timeBetweenGPS >= 1000) {
     getCurrentPosition(playerMoves);
-    timeBetween = 0;
-
-    if(yLineIsSet) {
-      executeOnMapChange();
-    }
+    timeBetweenGPS = 0;
   } else {
-    timeBetween += deltaTime;
+    timeBetweenGPS += deltaTime;
   }
+  if(timeBetweenDraw >= 100 && yLineIsSet) {
+    executeOnMapChange();
+  } else {
+    timeBetweenDraw += deltaTime;
+  }
+
 
 
   //mousePosition();
