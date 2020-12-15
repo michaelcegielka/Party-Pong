@@ -31,9 +31,9 @@ function setPlayerPos(position) {
   //playerCoordX 
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
-  fill(255, 255, 255);
-  textSize(50);
-  text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), 0, 100);
+  //fill(255, 255, 255);
+  //textSize(50);
+  //text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), 0, 100);
 
 }
 
