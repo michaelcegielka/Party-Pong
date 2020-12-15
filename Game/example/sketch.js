@@ -206,7 +206,7 @@ function setPos(position) {
   
   fill(255, 100, 100);
   textSize(32);
-  text("Current position: " + nf(lat,2,2) + " " + nf(lng,2,2), -200, 200);
+  text("Current position: " + doNf(lat,2,2) + " " + doNf(lng,2,2), -200, 200);
   noFill();
 }
 function sliderShow(){
