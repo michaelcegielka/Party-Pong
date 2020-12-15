@@ -47,7 +47,7 @@ function playersCurrentPosition(){
   }
   navigator.geolocation.getCurrentPosition(setPlayerPos);
 }
-=======
+
 
 
 
