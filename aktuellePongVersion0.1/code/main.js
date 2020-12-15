@@ -22,15 +22,18 @@ function setup() {
 
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
-  if(yLineIsSet) {
-    mappaMap.onChange(executeOnMapChange);
-  }
-   if(timeBetween >= 1000) {
+
+  if(timeBetween >= 1000) {
     getCurrentPosition(playerMoves);
     timeBetween = 0;
+
+    if(yLineIsSet) {
+      executeOnMapChange();
+    }
   } else {
     timeBetween += deltaTime;
   }
+
 
   //mousePosition();
 }
