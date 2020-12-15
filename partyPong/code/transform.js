@@ -25,6 +25,9 @@ let paddleGeoCoor;
 //ist, steht die Achse senkrecht. Es wird mit dem Uhrzeigersinn gedreht.
 let rotAngle = 0;  //in degrees
 
+let playerCoordX = 0;
+let playerCoordY = 0;
+
 //Setzt den Rotierungswinkel
 function setRotAngle(pAngle) {
   rotAngle = pAngle;
@@ -181,21 +184,14 @@ function destVincenty(lat1, lon1, brng, dist) {
       };
 };
 
+  //function showPosition(){
+  //  text("Current position: " + (setPlayerPos.playerCoordX,2,2) + " " + (setPlayerPos.playerCoordY,2,2), 0, 0);
+//
+ // }
+ // function updateShowPosition()
+ // { 
+ //   text("Current position: " + (setPlayerPos.playerCoordX,2,2) + " " + (setPlayerPos.playerCoordY,2,2), 0, 0);
+//
+ // }
 
-
-function playersCurrentPosition(){
-
-  if (!navigator.geolocation) {
-    alert("navigator.geolocation is not available");
-  }
-  navigator.geolocation.getCurrentPosition(setPlayerPos);
-}
-  function setPlayerPos(position) {
-    var playerCoordX = position.coords.latitude;
-    var playerCoordY = position.coords.longtitude;
-    fill(255, 100, 100);
-    textSize(32);
-    text("Current position: " + nf(playerCoordX,2,2) + " " + nf(playerCoordY,2,2), -200, 200);
-    noFill();
-  }
 
