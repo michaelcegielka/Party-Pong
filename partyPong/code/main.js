@@ -3,10 +3,16 @@
 let canvas;
 
 //button
-let button;
+let setButton;
+let resetRotationButton;
 let slider;
+var panda;
 
 //Wird ein mal zu Beginn von p5.js aufgerufen.
+function preload() {
+  
+  panda = loadImage('panda.jpg');
+}
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   setupMap();
@@ -20,13 +26,17 @@ function setup() {
 
 
   //Button try
-  button = createButton('set position');
-  button.position(19, 19);
-  //button.mousePressed(changePlayerPosition);
+  setButton = createButton('set position');
+  setButton.position(19, 19);
+  //setButton.mousePressed(changePlayerPosition);
+  resetRotationButton = createButton('reset angle');
+  resetRotationButton.position(windowWidth/10, 19);
+  resetRotationButton.mousePressed(resetRotation);
 
   //Slider
   setSlider();
 }
+
 
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
@@ -35,6 +45,7 @@ function draw() {
   mousePosition();
   let rotationTest = slider.value();
   setRotAngle(rotationTest);
+
 
   
 }
@@ -61,6 +72,7 @@ function executeOnMapChange() {
   drawField();
   drawYLine();
   drawPaddleOnPosition();
+  pandaBg();
   //playersCurrentPosition()
 
 
@@ -72,5 +84,14 @@ function setSlider(){
   slider = createSlider(0, 180, 90, 10);
   slider.position(windowWidth/2, windowHeight/3);
   slider.style('width', '250px');
+
+}
+function resetRotation(){
+  slider.value(90);
+  
+  //textSize(400);
+  //text('DONE', windowWidth/2, windowHeight/2);
+  //fill(255, 255, 255);
+  //setRotAngle(90);
 
 }
