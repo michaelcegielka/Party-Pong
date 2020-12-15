@@ -21,4 +21,11 @@ function drawField(){
   stroke(255);
 }
 
+function pandaBg(){
+
+
+  image(panda, windowWidth/2, 0, 150, 150);
+
+}
+
 
