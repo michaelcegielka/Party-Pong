@@ -39,7 +39,7 @@ function setup() {
 
   //aktuelle Position als Text
   //showPosition()
-=======
+
 
 }
 
