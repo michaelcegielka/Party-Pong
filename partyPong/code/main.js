@@ -23,12 +23,11 @@ function setup() {
   setPaddleStartCoor();
   setRotAngle(90);
   setYLineMinMaxCoor();
-  
+
 
   //Button try
   setButton = createButton('set position');
   setButton.position(19, 19);
-  setButton.mousePressed(updateStartingPoint);
   //setButton.mousePressed(changePlayerPosition);
   resetRotationButton = createButton('reset angle');
   resetRotationButton.position(windowWidth/10, 19);
@@ -37,8 +36,11 @@ function setup() {
   //Slider
   setSlider();
 
+
   //aktuelle Position als Text
   //showPosition()
+=======
+
 }
 
 
@@ -47,11 +49,13 @@ function draw() {
   
   mappaMap.onChange(executeOnMapChange);
   mousePosition();
-
   let rotationTest = slider.value();
   setRotAngle(rotationTest);
+
   //playersCurrentPosition();
   
+
+
 
 
   
@@ -73,7 +77,6 @@ function mousePosition() {
 //Innerhalb dieser Methode werden all die Methoden aufgerufen, die die neuen
 //Bildschirm-Koordinaten bestimmen und die Methoden, die die Objekte zeichen.
 function executeOnMapChange() {
-  
   clear();
   updateStartingPoint();
   updateYLineMinMaxPoints();
@@ -81,10 +84,8 @@ function executeOnMapChange() {
   drawYLine();
   drawPaddleOnPosition();
   pandaBg();
+  //playersCurrentPosition()
 
-  
-  //if(showPosition() != updateShowPosition())
-  //  updateShowPosition();
 
 }
 
@@ -92,18 +93,16 @@ function executeOnMapChange() {
 function setSlider(){
 
   slider = createSlider(0, 180, 90, 10);
-  slider.position(windowWidth/3, windowHeight/3);
-  slider.size(400, 80);
-
-
+  slider.position(windowWidth/2, windowHeight/3);
+  slider.style('width', '250px');
 
 }
 function resetRotation(){
   slider.value(90);
-  fill(255, 255, 255);
- // textSize(400);
- // text('DONE', windowWidth/2, windowHeight/2);
   
+  //textSize(400);
+  //text('DONE', windowWidth/2, windowHeight/2);
+  //fill(255, 255, 255);
   //setRotAngle(90);
 
 }

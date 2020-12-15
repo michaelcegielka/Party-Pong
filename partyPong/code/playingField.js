@@ -27,6 +27,7 @@ function pandaBg(){
   image(panda, windowWidth/2, 0, 150, 150);
 
 }
+
 function setPlayerPos(position) {
   //playerCoordX 
   var lat = position.coords.latitude;
@@ -46,5 +47,7 @@ function playersCurrentPosition(){
   }
   navigator.geolocation.getCurrentPosition(setPlayerPos);
 }
+=======
+
 
 
