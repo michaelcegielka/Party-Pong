@@ -1,7 +1,7 @@
 
 //Das Canvas-Objekt für p5.js
 let canvas;
-
+let timeBetween = 0;
 
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 //Wird ein mal zu Beginn von p5.js aufgerufen.
