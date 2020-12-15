@@ -35,6 +35,12 @@ function setup() {
 
   //Slider
   setSlider();
+
+
+  //aktuelle Position als Text
+  //showPosition()
+=======
+
 }
 
 
@@ -45,6 +51,11 @@ function draw() {
   mousePosition();
   let rotationTest = slider.value();
   setRotAngle(rotationTest);
+
+  //playersCurrentPosition();
+  
+
+
 
 
   
