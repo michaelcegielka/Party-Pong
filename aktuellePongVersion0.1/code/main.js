@@ -25,6 +25,13 @@ function draw() {
   if(yLineIsSet) {
     mappaMap.onChange(executeOnMapChange);
   }
+   if(timeBetween >= 1000) {
+    getCurrentPosition(playerMoves);
+    timeBetween = 0;
+  } else {
+    timeBetween += deltaTime;
+  }
+
   //mousePosition();
 }
 
