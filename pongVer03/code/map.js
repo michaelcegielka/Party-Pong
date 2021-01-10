@@ -69,7 +69,7 @@ function drawYLine() {
   noStroke();
 
   //Es wird nur die y-Komponente benötigt. Diese entspricht in diesem Fall der Länge des Vektors.
-  rectHeight = calculateRotatedVector(yMinPoint, yMaxPoint);
+  rectHeight = calculateRotatedVector(yMinPoint, yMaxPoint, rotAngle);
 
   transformModeOn();
   rect(-rectWidth/2, 0, rectWidth/2, rectHeight.y);
@@ -93,7 +93,7 @@ bewegen.
 */
 function drawPaddleOnPosition() {
   let pos = mappaMap.latLngToPixel(paddleGeoCoor.lat, paddleGeoCoor.lng);
-  let transfPos = calculateRotatedVector(yMinPoint, pos);   //Es wird nur die y-Komponente benötigt.
+  let transfPos = calculateRotatedVector(yMinPoint, pos, rotAngle);   //Es wird nur die y-Komponente benötigt.
   let yPosition;
   let paddleHeight = rectHeight.y/8;
 

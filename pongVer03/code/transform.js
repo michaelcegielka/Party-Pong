@@ -26,9 +26,7 @@ function setYLineMinStart() {
 //Bestimmt YMin und YMax
 function setYLineMinMax() {
   yMinPointStart = mappaMap.latLngToPixel(yMinGeoCoorStart.lat, yMinGeoCoorStart.lng);
-  rotAngle = 360 - rotAngle;
-  let vec = calculateRotatedVector(startingPoint, yMinPointStart);
-  rotAngle = -(rotAngle - 360);
+  let vec = calculateRotatedVector(startingPoint, yMinPointStart, 360 - rotAngle);
 
   yMinPoint = {
     x: startingPoint.x + vec.x,
@@ -55,7 +53,7 @@ Koordinatensystem zurückzukehren, muss der "transformMode" mit transformModeOff
 beendet werden.
 */
 function transformModeOn() {
-  let moveByRot = calculateRotatedVector(startingPoint, yMinPoint);
+  let moveByRot = calculateRotatedVector(startingPoint, yMinPoint, rotAngle);
   angleMode(DEGREES);
   push();
   translate(startingPoint.x, startingPoint.y);
@@ -75,24 +73,8 @@ function initPlayerGeoCoor() {
   playerGeoCoor4 = startingGeoCoor;
 }
 
-
-function playerMoves(position) {
-  if(typeof position !== 'undefined') {
-    playerGeoCoor4 = playerGeoCoor3;
-    playerGeoCoor3 = playerGeoCoor2;
-    playerGeoCoor2 = playerGeoCoor1;
-    playerGeoCoor1 = position;
-    let newPaddlePos = {
-      lat: (playerGeoCoor1.lat + playerGeoCoor2.lat + playerGeoCoor3.lat + playerGeoCoor4.lat) / 4,
-      lng: (playerGeoCoor1.lng + playerGeoCoor2.lng + playerGeoCoor3.lng + playerGeoCoor4.lng) / 4
-    };
-    setPaddleGeoCoor(newPaddlePos.lat, newPaddlePos.lng);
-  }
-}
-
 function calculateCenterOfMap() {
-  rotAngle = 450 - rotAngle;
-  let vec = calculateRotatedVector(startingPoint, yMinPointStart);
+  let vec = calculateRotatedVector(startingPoint, yMinPointStart, 450-rotAngle);
   let center = {
     x: startingPoint.x + vec.x,
     y: startingPoint.y + vec.y
@@ -100,16 +82,12 @@ function calculateCenterOfMap() {
   let centerGeo = mappaMap.pixelToLatLng(center.x, center.y);
   staticOptions.lat = centerGeo.lat;
   staticOptions.lng = centerGeo.lng;
-  rotAngle = -(rotAngle - 450);
 }
 
 function setFieldPoints() {
   middleXPoint = helperMappaMap.latLngToPixel(startingGeoCoor.lat, startingGeoCoor.lng);
   fieldCenter = helperMappaMap.latLngToPixel(yMinGeoCoorStart.lat, yMinGeoCoorStart.lng);
-  rotAngleTmp = rotAngle;
-  rotAngle = 90;
-  let vec = calculateRotatedVector(middleXPoint, fieldCenter);
-  rotAngle = rotAngleTmp;
+  let vec = calculateRotatedVector(middleXPoint, fieldCenter, 90);
   xMinPoint = {
     x: middleXPoint.x + vec.x,
     y: middleXPoint.y + vec.y
@@ -130,12 +108,12 @@ Berechnet einen Vektor zwischen zwei gegebenen Punkten und dreht diesen um den
 Rotierungswinkel gegen den Urzeigersinn. Insbesondere die Y-Komponente des
 resultierenden Vektors wird dann zum Zeichnen im "transformMode" verwendet.
 */
-function calculateRotatedVector(from, to) {
+function calculateRotatedVector(from, to, pAngle) {
   let vec = {
     x: to.x - from.x,
     y: -(to.y -from.y)
   };
-  return rotateCoord(rotAngle, vec);
+  return rotateCoord(pAngle, vec);
 }
 
 /*

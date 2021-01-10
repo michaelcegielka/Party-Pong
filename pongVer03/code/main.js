@@ -30,6 +30,7 @@ function setup() {
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
   clear();
+  //mousePosition();
 
   if(!gameStarted) {
     pandaBg();
@@ -62,9 +63,20 @@ function draw() {
       background(255);
       image(mapImage, 0, 0);
 
+      if(timeBetweenGPS >= 50) {
+        getCurrentPosition(setCurPos);
+        timeBetweenGPS = 0;
+      } else {
+        timeBetweenGPS += deltaTime;
+      }
+
       if(typeof helperMappaMap !== 'undefined') {
         setFieldParameters();
-        drawPositionStatic();
+        updateStartingPoint();
+        setYLineMinMax();
+        playerMoves(curPos);
+        calcPaddlePointX();
+        //drawPositionStatic();
         drawField();
       }
     } else {
@@ -73,7 +85,6 @@ function draw() {
     }
   }
 
-  //mousePosition();
 }
 
 //Methode zum Testen: Überträgt beim Klicken auf die Karte die Geo-Koordinaten
@@ -82,7 +93,6 @@ function mousePosition() {
   if(mouseIsPressed) {
     const position = mappaMap.pixelToLatLng(mouseX, mouseY);
     setPaddleGeoCoor(position.lat, position.lng);
-    return false;
   }
 }
 
