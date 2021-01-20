@@ -13,7 +13,7 @@ let staticMapLoadingTime = 0;
 function preload() {
   panda = loadImage('panda.jpg');
 
-  getCurrentPosition(setupMap);
+
 
   let firebaseConfig = {
       apiKey: "AIzaSyBkQLCXctDnaGSKwFVxCobeiyJKwRXoTqE",
@@ -35,6 +35,7 @@ function preload() {
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
+  getCurrentPosition(setupMap);
   yLineIsSet = false;
 
   //Buttons und Slider
