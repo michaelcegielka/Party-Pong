@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* Reset */
+
+html, body { margin: 0; padding: 0; border: 0;  
+                background: transparent; font-size:10px; 
+                overflow-y: hidden; 
+    overflow-x: hidden;}
+
+div, nav, p  {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	background: transparent;
+	}
+
+img 	{ margin:0; padding:0; border:0; }
+
+table, tr, th, td, tbody, tfoot, thead {
+	margin: 0; padding: 0; border: 0;
+	vertical-align: baseline;
+	background: transparent;
+	}
+	
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* CSS Document */
+/*
+body 
+{
+	background-image:; background-attachment:fixed; background-repeat:no-repeat ;
+}
+*/
+
+a {
+	color: rgb(255, 255, 255); 
+	text-decoration: none;
+  }
+b {
+	color: rgb(255, 255, 255); 
+	text-decoration: none;
+  }
+
+
+
+
+
+/*MAIN*/
+#startscreen {
+	 height: 100vh; width:100vw; background-color:#000000; padding-top: 5%;  background-color: transparent;	
+}
+#startscreenbg {
+    height: 100vh;; width:100vw; background-color:#f0e9e3;  background-image:url(Designs_startScreen.jpg); background-size: 100vw 100vh; 	
+}
+
+.startpic{
+    display: block; height: 40vh;; width:30vw; margin-left: auto; margin-right:auto; 
+
+}
+
+
+.ueberschrift1 {
+	color:#284f92; font-size:70px; text-align:center; padding-top: 43%; visibility: hidden;
+}
+.ueberschrift2 {
+	color:#284f92; font-size:30px; text-align:center; text-decoration:underline;
+}
+.text1 {
+	color:#000; font-size:20px; text-align:center;
+}
+.text2 {
+	color:#000; font-size:20px; text-align:center;
+}
+.buttons1 {
+	color:#FFF; font-size:15px; text-align:center;
+ }
+ .buttons2 {
+	color:#FFF; font-size:15px; text-align:center;
+ }
+ .menuebuttons1{
+	 font-size:22px;  text-align:center;  padding-top: 11%;
+ }
+ .menuebuttons2{
+	 font-size:25px; float: right;
+ }
+.eingabe01{
+	 margin-left: auto; margin-right: auto; text-decoration: none; padding-top: 5%;
+ }
