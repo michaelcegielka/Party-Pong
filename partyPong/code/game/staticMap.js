@@ -173,9 +173,22 @@ function drawPlayerInfo() {
   textAlign(CENTER, CENTER);
   text(playerName, 80, windowHeight - 25, 200, 50);
   text(otherPlayerName, 80, 25, 200, 50);
-  text("Points: 0", windowWidth - 130, windowHeight - 25);
-  text("Points: 0", windowWidth - 130 + 20, 25);
+  text("Points: 0", windowWidth - 160, windowHeight - 25);
+  text("Points: 0", windowWidth - 160 + 20, 25);
+
+  let backCol = color(229, 0, 53);
+  let fontCol = color(255);
+
+  backToMenu = createButton('Back');
+  backToMenu.style('background-color', backCol);
+  backToMenu.style("color", fontCol);
+  backToMenu.position(270, 19);
+  backToMenu.mousePressed(openIndex);
+
+
 }
+
+
 
 function drawWaitingForOther() {
   background(240);
@@ -184,4 +197,10 @@ function drawWaitingForOther() {
   textSize(30);
   textAlign(CENTER, CENTER);
   text("Waiting for the other player.", windowWidth/2, windowHeight/2);
+}
+
+
+function openIndex(){
+  document.location.href = "https://michaelcegielka.github.io/Party-Pong/partyPong/code/menus/index.html";
+
 }

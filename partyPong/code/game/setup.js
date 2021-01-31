@@ -57,6 +57,13 @@ function setButtons() {
   startGameButton.position(120, 19);
   startGameButton.mousePressed(startGame);
   startGameButton.hide();
+  
+  
+  backToMenu = createButton('Back');
+  backToMenu.style('background-color', backCol);
+  backToMenu.style("color", fontCol);
+  backToMenu.position(270, 19);
+  backToMenu.mousePressed(openIndex);
 }
 
 //Setzt den Slider zurück.
