@@ -128,6 +128,13 @@ function fetchThisRoom() {
   });
 }
 
+function fetchThisRoomWithoutBall() {
+  roomsTable.child(roomID).once('value', (snapshot) => {
+    playerOne = snapshot.val().playerOne;
+    playerTwo = snapshot.val().playerTwo;
+  });
+}
+
 
 // Holt die Werte des Spielers aus der Datenbank
 function fetchThisPlayer() {
@@ -157,6 +164,8 @@ function fetchOtherPlayer() {
       otherPlayerReady = snapshot.val().ready;
       otherPlayerPoints = snapshot.val().points;
     });
+  } else {
+    console.log("fetchOtherPlayer: ID not valid");
   }
 }
 

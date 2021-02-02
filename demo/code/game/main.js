@@ -56,10 +56,10 @@ function draw() {
     drawPosition();
 
   } else {  //ingame screen
-    if(!helperMapImageLoaded && staticMapLoadingTime < 2000) {
+    if(!helperMapImageLoaded) {
       makeHelperMap();
     }
-    if(mapImageLoaded && staticMapLoadingTime > 2000) {
+    if(mapImageLoaded && staticMapLoadingTime > 500) {
 
       if(otherPlayerReady) {
       //if(true) {
@@ -115,13 +115,17 @@ function drawLinePaddle() {
 }
 
 function getPositionAndData() {
-  if(timeBetween >= 30) {
-    updateBallPosition();
+  if(timeBetween >= 40) {
     getCurrentPosition(setCurPos);
     fetchOtherPlayer();
 
     if(playerNo == 2) {
       fetchThisRoom();
+    } else if(playerNo == 1) {
+      fetchThisRoomWithoutBall();
+    }
+    if(otherPlayerReady) {
+      updateBallPosition();
     }
 
     timeBetween = 0;
