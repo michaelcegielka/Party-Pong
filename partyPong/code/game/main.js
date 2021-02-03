@@ -39,63 +39,47 @@ function setup() {
 
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
+  getPositionAndData();
   clear();
   //mousePosition();
 
   if(!gameStarted) {  //setup screen
-    /*
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(setCurPos, geoError, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 6000
-      });
+    if(typeof mappaMap !== 'undefined') {
+      playHereButton.show();
     }
-    */
-    if(timeBetween >= 50) {
-      getCurrentPosition(setCurPos);
-      fetchThisRoom();
-      fetchOtherPlayer();
-      timeBetween = 0;
-    } else {
-      timeBetween += deltaTime;
-    }
-
-    if(yLineIsSet) {
+    if(typeof yMinPointStart !== 'undefined') {
+      slider.show();
+      startGameButton.show();
       drawLinePaddle();
-      playerMoves(curPos);
+      //playerMoves(curPos);
     }
     drawPosition();
 
   } else {  //ingame screen
-    fetchThisRoom();
-    fetchOtherPlayer();
-    if(!helperMapImageLoaded && staticMapLoadingTime < 2000) {
+    if(!helperMapImageLoaded) {
       makeHelperMap();
     }
-    if(mapImageLoaded && staticMapLoadingTime > 2000) {
+    if(mapImageLoaded && staticMapLoadingTime > 500) {
 
       if(otherPlayerReady) {
+      //if(true) {
         background(255);
         image(mapImage, 0, 0);
 
-        if(timeBetween >= 50) {
-          getCurrentPosition(setCurPos);
-          timeBetween = 0;
-        } else {
-          timeBetween += deltaTime;
-        }
-
-        if(typeof helperMappaMap !== 'undefined') {
+        if(typeof helperMappaMap !== 'undefined' && typeof staticMappaMap !== 'undefined') {
           setFieldParameters();
           updateStartingPoint();
           setYLineMinMax();
+
           playerMoves(curPos);
           calcPaddlePointX();
-          updateThisPlayerAttribute("xCoordinate", paddlePointX);
+
+          //testMovePaddles();
+
           drawField();
           drawPlayerInfo();
-          //drawPositionStatic();
+
+          updateThisPlayerAttribute("xCoordinate", paddlePointX);
         }
       } else {
         drawWaitingForOther();
@@ -128,4 +112,24 @@ function drawLinePaddle() {
   drawYLine();
   //drawPaddleOnPosition();
   setRotAngle(slider.value());
+}
+
+function getPositionAndData() {
+  if(timeBetween >= 40) {
+    getCurrentPosition(setCurPos);
+    fetchOtherPlayer();
+
+    if(playerNo == 2) {
+      fetchThisRoom();
+    } else if(playerNo == 1) {
+      fetchThisRoomWithoutBall();
+    }
+    if(otherPlayerReady) {
+      updateBallPosition();
+    }
+
+    timeBetween = 0;
+  } else {
+    timeBetween += deltaTime;
+  }
 }

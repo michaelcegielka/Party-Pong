@@ -18,18 +18,21 @@ let playerName = "-1";
 let playerXCoor = -1;
 let ready = false;
 let playerPoints = 0;
+let ballInPlayerGoal = false;
 
 let roomID = "-1";
 let playerOne = "-1";
 let playerTwo = "-1";
-let ballXCoor = 140;
-let ballYCoor = -140;
+let ballXCoor = (-1);
+let ballYCoor = (-1);
+let playerReadyForPlaying = false;
 
 let otherPlayerName = "-1";
 let otherPlayerXCoor = -1;
 let otherPlayerReady = false;
 let otherPlayerPoints = 0;
 let ballInOtherGoal = false;
+let otherReadyForPlaying = false;
 
 
 // Initialisierung von Firebase
@@ -48,7 +51,9 @@ function addThisPlayer(){
     xCoordinate: playerXCoor,
     room: roomID,
     ready: ready,
-    points: playerPoints
+    points: playerPoints,
+    ballInGoal: ballInPlayerGoal,
+    readyForPlaying: playerReadyForPlaying
   });
 }
 
@@ -90,6 +95,16 @@ function updateThisPlayerAttribute(attribute, newValue) {
         points: newValue
       });
       break;
+    case "ballInGoal":
+      playersTable.child(playerID).update({
+        ballInGoal: newValue
+      });
+      break;
+    case "readyForPlaying":
+      playersTable.child(playerID).update({
+        readyForPlaying: newValue
+      });
+      break;
   }
 }
 
@@ -128,13 +143,6 @@ function fetchThisRoom() {
   });
 }
 
-function fetchThisRoomWithoutBall() {
-  roomsTable.child(roomID).once('value', (snapshot) => {
-    playerOne = snapshot.val().playerOne;
-    playerTwo = snapshot.val().playerTwo;
-  });
-}
-
 
 // Holt die Werte des Spielers aus der Datenbank
 function fetchThisPlayer() {
@@ -144,6 +152,8 @@ function fetchThisPlayer() {
     ready = snapshot.val().ready;
     playerPoints = snapshot.val().points;
     roomID = snapshot.val().room;
+    ballInPlayerGoal = snapshot.val().ballInGoal;
+    playerReadyForPlaying = snapshot.val().readyForPlaying;
   });
 }
 
@@ -163,9 +173,9 @@ function fetchOtherPlayer() {
       otherPlayerXCoor = snapshot.val().xCoordinate;
       otherPlayerReady = snapshot.val().ready;
       otherPlayerPoints = snapshot.val().points;
+      ballInOtherGoal = snapshot.val().ballInGoal;
+      otherReadyForPlaying = snapshot.val().readyForPlaying;
     });
-  } else {
-    console.log("fetchOtherPlayer: ID not valid");
   }
 }
 

@@ -13,8 +13,6 @@ let panda;
 //Wird ausgeführt, wenn der playHereButton gedrückt wird.
 function setButtonPressed() {
   getCurrentPosition(setYLine);
-  slider.show();
-  startGameButton.show();
 }
 
 //Zeichnet die Bewegungsachse an der aktuellen Position und mit dem durch den
@@ -50,6 +48,7 @@ function setButtons() {
   playHereButton.style("color", fontCol);
   playHereButton.position(19, 19);
   playHereButton.mousePressed(setButtonPressed);
+  playHereButton.hide();
 
   startGameButton = createButton('Start Game');
   startGameButton.style('background-color', backCol);
@@ -57,13 +56,6 @@ function setButtons() {
   startGameButton.position(120, 19);
   startGameButton.mousePressed(startGame);
   startGameButton.hide();
-  
-  
-  backToMenu = createButton('Back');
-  backToMenu.style('background-color', backCol);
-  backToMenu.style("color", fontCol);
-  backToMenu.position(270, 19);
-  backToMenu.mousePressed(openIndex);
 }
 
 //Setzt den Slider zurück.
