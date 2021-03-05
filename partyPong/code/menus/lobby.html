@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="../style.css" rel="stylesheet" type="text/css" />
     <title>Join Game</title>
     <style media="screen">
       html {
@@ -24,7 +24,7 @@
 
     <a class="menuebuttons3" href="index.html">Back</a>
 
-    <div class="font2"> 
+    <div class="font2">
       <p class="heading1">JOIN GAME</p>
     </div>
 
@@ -41,8 +41,9 @@
 
     initializeDatabase()
     fetchOpenRooms();
+    removeInactivePlayers();
+    removeAbandonedRooms();
     retrievePlayerID();
-    fetchThisPlayer();
 
     function fetchOpenRooms() {
       roomsTable.once('value')
@@ -95,15 +96,15 @@
     }
 
     function mouseOverRoom(el) {
-        el.style.backgroundColor = "black";
-        el.style.color ="white";
-        el.style.border = "3px solid white";
+        //el.style.backgroundColor = "black";
+        //el.style.color ="white";
+        el.style.border = "7.5px solid gray";
       }
 
     function mouseOutRoom(el) {
-      el.style.backgroundColor = "white";
-      el.style.color = "black";
-      el.style.border = "3px solid black";
+      //el.style.backgroundColor = "white";
+      //el.style.color = "black";
+      el.style.border = "7.5px solid white";
     }
 
     function roomClicked(el) {
@@ -111,10 +112,13 @@
       let number = content.match(/\d+/g)[1];
       let rID = roomIDArray[number-1];
       if(confirm("Are you sure you want to join this game?")) {
+        retrievePlayerName();
         roomID = rID;
-        updateThisPlayerAttribute("room", roomID);
+        playerID = playersTable.push().key;
+        addThisPlayer();
         updateThisRoomAttribute("playerTwo", playerID);
         storePlayerNumber(2);
+        storePlayerID();
         storeRoomID();
         window.location.href = "../game/startGame.html";
       }

@@ -1,9 +1,10 @@
 //Das Canvas-Objekt für p5.js
 let canvas;
 
-let timeBetween = 0;
+let impactFont;
 
 let gameStarted = false;
+let gameEnded = false;
 
 let mapImageLoaded = false;
 let helperMapImageLoaded = false;
@@ -13,12 +14,17 @@ let playerNo = 0;
 
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 function preload() {
-  panda = loadImage('panda.jpg');
-  initializeDatabase();
+  panda = loadImage('../../assets/panda.jpg');
+  impactFont = loadFont('../../assets/impact.ttf');
+  gameLostImg = loadImage('../../assets/gameLost.png');
+  gameWonImg = loadImage('../../assets/gameWon.png');
 }
 
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 function setup() {
+  initializeDatabase();
+  removeInactivePlayers();
+  removeAbandonedRooms();
   canvas = createCanvas(windowWidth, windowHeight);
   getCurrentPosition(setupMap);
   yLineIsSet = false;
@@ -26,6 +32,9 @@ function setup() {
   //Buttons und Slider
   setSlider();
   setButtons();
+  setColors();
+
+  //Position des Spielers
   getCurrentPosition(setCurPos);
   drawPosition();
 
@@ -39,8 +48,9 @@ function setup() {
 
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
-  getPositionAndData();
+  doPositionAndData();
   clear();
+  startNewGameButton.hide();
   //mousePosition();
 
   if(!gameStarted) {  //setup screen
@@ -60,8 +70,10 @@ function draw() {
       makeHelperMap();
     }
     if(mapImageLoaded && staticMapLoadingTime > 500) {
-
-      if(otherPlayerReady) {
+      if(!ready) {
+      updateThisPlayerAttribute("ready", true);
+      }
+      if(otherPlayerReady && !gameEnded) {
       //if(true) {
         background(255);
         image(mapImage, 0, 0);
@@ -78,19 +90,29 @@ function draw() {
 
           drawField();
           drawPlayerInfo();
+          checkGameWon();
 
           updateThisPlayerAttribute("xCoordinate", paddlePointX);
         }
-      } else {
-        drawWaitingForOther();
+      }
+      if(!otherPlayerReady || typeof staticMappaMap == 'undefined') {
+        showWaitingScreen();
+      }
+      if(gameEnded) {
+        checkGameWon();
       }
     } else {
       makeStaticMap();
       staticMapLoadingTime += deltaTime;
-      drawWaitingForOther();
+      showWaitingScreen();
     }
   }
-
+  if(typeof mappaMap !== 'undefined' && otherPlayerInactive()) {
+    playHereButton.hide();
+    startGameButton.hide();
+    slider.hide();
+    showOtherPlayerLeftScreen();
+  }
 }
 
 //Methode zum Testen: Überträgt beim Klicken auf die Karte die Geo-Koordinaten
@@ -114,22 +136,39 @@ function drawLinePaddle() {
   setRotAngle(slider.value());
 }
 
-function getPositionAndData() {
-  if(timeBetween >= 40) {
-    getCurrentPosition(setCurPos);
-    fetchOtherPlayer();
+let doGetData = true;
+let timeBetween = 0;
+let timestampTimeBetween = 0;
 
-    if(playerNo == 2) {
-      fetchThisRoom();
-    } else if(playerNo == 1) {
-      fetchThisRoomWithoutBall();
-    }
-    if(otherPlayerReady) {
-      updateBallPosition();
+function doPositionAndData() {
+  if(!gameEnded) {
+    if(timeBetween >= 40) {
+      getCurrentPosition(setCurPos);
+      if(otherPlayerReady) {
+        updateBallPosition();
+      }
+      timeBetween = 0;
+      doGetData = true;
+    } else {
+      timeBetween += deltaTime;
     }
 
-    timeBetween = 0;
-  } else {
-    timeBetween += deltaTime;
+    if(timeBetween >= 20 && doGetData) {
+      fetchOtherPlayer();
+      if(playerNo == 2) {
+        fetchThisRoom();
+        fetchThisPlayersPoints();
+      } else if(playerNo == 1) {
+        fetchThisRoomWithoutBall();
+      }
+      doGetData = false;
+    }
+
+    if(timestampTimeBetween >= 1000) {
+      updateThisPlayerAttribute("timestamp", Date.now());
+      timestampTimeBetween = 0;
+    } else {
+      timestampTimeBetween += deltaTime;
+    }
   }
 }

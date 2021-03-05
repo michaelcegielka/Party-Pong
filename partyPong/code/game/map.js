@@ -2,7 +2,8 @@
 //dargestellt wird.
 
 //Dinge, die für die Erstellung einer Karte mit mappa benötigt werden.
-const mappakey = 'pk.eyJ1IjoicmxmYmNrciIsImEiOiJja2d0Ym5qbjkwc3poMzBreTBnMnM2Z3czIn0.6fZAUJL9xrsg5Mi-DHH-ZA';
+//const mappakey = 'pk.eyJ1IjoicmxmYmNrciIsImEiOiJja2d0Ym5qbjkwc3poMzBreTBnMnM2Z3czIn0.6fZAUJL9xrsg5Mi-DHH-ZA';
+const mappakey = 'pk.eyJ1IjoibGFyZHVlIiwiYSI6ImNrbDZmbHFmYTFkNTQzM21udWRjOWx3MG0ifQ.G_j_vlLNNbI8mB1pLoqyPQ';
 const mappa = new Mappa('MapboxGL', mappakey);
 
 //Das mappa-Objekt, womit die Karte dargestellt wird.
@@ -36,7 +37,9 @@ const options = {
   zoom: 17,
   minZoom: 16,
   maxZoom: 18,
-  style: 'mapbox://styles/mapbox/dark-v9',
+  //style: 'mapbox://styles/lardue/ckl6d1md40jnf17ny5qnme0t5'
+  //style: 'mapbox://styles/mapbox/dark-v9'
+  style: 'mapbox://styles/mapbox/light-v9'
 }
 
 //Erstellt die Karte mit mappa und legt das Canvas auf die Map.
@@ -51,7 +54,11 @@ function setupMap(position) {
 function drawPosition() {
   if(typeof curPos !== 'undefined' && typeof mappaMap !== 'undefined') {
     let pos = mappaMap.latLngToPixel(curPos.lat, curPos.lng);
-    fill(color('magenta'));
+    stroke(0);
+    strokeWeight(2);
+    //fill(128, 255, 170);
+    //noStroke();
+    fill(colorPlayerOne);
     ellipse(pos.x, pos.y, 15, 15);
   }
   //else {console.log("Position undefined")};
@@ -65,8 +72,9 @@ befinden sich jeweils an den Enden der Bewegungsachse.
 */
 function drawYLine() {
   rectMode(CORNERS);  //Rechteck wird definiert über zwei Eckpunkte, die diagonal zueinander sind
-  fill(255);
-  noStroke();
+  fill(255,75);
+  stroke(0);
+  strokeWeight(2.5);
 
   //Es wird nur die y-Komponente benötigt. Diese entspricht in diesem Fall der Länge des Vektors.
   rectHeight = calculateRotatedVector(yMinPoint, yMaxPoint, rotAngle);

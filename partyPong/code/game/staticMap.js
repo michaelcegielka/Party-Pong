@@ -20,7 +20,7 @@ const staticOptions = {
   scale: 1,
   pitch: 0,
   bearing: 0,
-  style: 'dark-v9',
+  style: 'light-v9'
 };
 
 function makeHelperMap() {
@@ -104,9 +104,10 @@ function drawField() {
   push();
   translate(originPoint.x, originPoint.y);
     rectMode(CORNER);
-    noFill();
+    //noFill();
+    fill(255,0.5);
     strokeWeight(borderWidth);
-    stroke(255);
+    stroke(0);
     rect(-borderWidth/2, -fieldWidth - borderWidth/2, fieldWidth + borderWidth, fieldWidth + borderWidth);
   pop();
 
