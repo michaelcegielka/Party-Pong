@@ -96,20 +96,21 @@ function drawPlayerInfo() {
   fill(33,37,41);
   noStroke();
   textFont(impactFont);
-  rect(0, windowHeight - 100, windowWidth, 100);
-  rect(0, 0, windowWidth, 100);
+  let topBottomRectWidth = 70;
+  rect(0, windowHeight - topBottomRectWidth, windowWidth, topBottomRectWidth);
+  rect(0, 0, windowWidth, topBottomRectWidth);
 
   rectMode(CENTER);
   fill(206,212,218);
   textSize(23);
   textAlign(CENTER, CENTER);
-  text(playerName, 80, windowHeight - 50, 200, 50);
-  text(otherPlayerName, 80, 50, 200, 50);
+  text(playerName, 80, windowHeight - topBottomRectWidth/2, 200, topBottomRectWidth/2);
+  text(otherPlayerName, 80, topBottomRectWidth/2, 200, topBottomRectWidth/2);
 
   let pointsTextP1 = "Points: " + playerPoints;
   let pointsTextP2 = "Points: " + otherPlayerPoints;
-  text(pointsTextP1, windowWidth - 130, windowHeight - 50);
-  text(pointsTextP2, windowWidth - 130 + 20, 50);
+  text(pointsTextP1, windowWidth - 130, windowHeight - topBottomRectWidth/2);
+  text(pointsTextP2, windowWidth - 130 + 20, topBottomRectWidth/2);
 }
 
 function showWaitingScreen() {
